@@ -1,14 +1,8 @@
 import { PrismaClient } from '@prisma/client'
 
 const prismaClientSingleton = () => {
-  // Prisma 7: configure connection via `datasources`, not `datasourceUrl`
-  return new PrismaClient({
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-  })
+  // Prisma v6: connection is configured via schema.prisma datasource url (DATABASE_URL)
+  return new PrismaClient()
 }
 
 declare global {
