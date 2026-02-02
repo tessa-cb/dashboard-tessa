@@ -27,9 +27,9 @@ Build an iterative personal dashboard (similar vibe to the referenced tweet) wit
    - [x] Moltbot Session Mapping (Manual UI)
 
 4. **Data Layer v1**
-   - [ ] Widget config schema
-   - [ ] Local mock data + caching
-   - [ ] Refresh controls (manual + interval)
+   - [x] Widget config schema
+   - [x] Local mock data + caching
+   - [x] Refresh controls (manual + interval)
 
 5. **Core Widgets (pick 3–5)**
    - [ ] Today/agenda

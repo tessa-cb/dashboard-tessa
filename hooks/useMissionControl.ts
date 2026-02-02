@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { cachedJson } from "@/lib/cachedFetch";
 
 export type Agent = {
   id: string;
@@ -44,11 +45,17 @@ export function useMissionControl({
   const [connected, setConnected] = useState(false);
   const [lastEvent, setLastEvent] = useState<unknown>(null);
 
-  const fetchData = async () => {
+  const fetchData = async ({ force = false }: { force?: boolean } = {}) => {
     try {
       const [a, t] = await Promise.all([
-        fetch("/api/agents").then((res) => res.json()),
-        fetch("/api/tasks").then((res) => res.json()),
+        cachedJson("api:agents", () => fetch("/api/agents").then((r) => r.json()), {
+          ttlMs: 1500,
+          force,
+        }),
+        cachedJson("api:tasks", () => fetch("/api/tasks").then((r) => r.json()), {
+          ttlMs: 1500,
+          force,
+        }),
       ]);
       setAgents(a);
       setTasks(t);
@@ -63,7 +70,7 @@ export function useMissionControl({
   useEffect(() => {
     const key = refreshKey ?? 0;
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchData().finally(() => onRefreshed?.(key));
+    fetchData({ force: true }).finally(() => onRefreshed?.(key));
   }, [refreshKey, onRefreshed]);
 
   useEffect(() => {
@@ -88,8 +95,7 @@ export function useMissionControl({
           setActivities((prev) => [data, ...prev].slice(0, 50));
           setLastEvent(data);
 
-          // Refetch data if structural change
-          // We could optimize this by patching state locally
+          // Refetch data (cached/deduped)
           fetchData();
         } catch (e) {
           console.error("SSE Parse Error", e);

@@ -43,7 +43,6 @@
 - **Frontend**:
   - `hooks/useMissionControl.ts`: Data fetching + SSE subscription.
   - Components: `AgentsPanel`, `KanbanBoard` (with Blocked column), `ActivityFeed`.
-  - Replaced `app/page.tsx` with Mission Control layout (bypassed generic widget registry for this feature).
   - Used `EventSource` for realtime updates.
   - Used global variable for `EventEmitter` (MVP/Local dev approach; would need Redis for scale).
   - Database file `dev.db` ignored in git.
@@ -63,7 +62,17 @@
   - Updated SSE: Added `COMMENT` and `NOTIFICATION` channels.
 - **Logic**:
   - Mentions (@Name) in comments trigger notifications for agents.
-  - Manual session mapping via Agent Panel (removed auto-sync per latest spec).
+  - Session mapping supports manual edit + file sync endpoint.
+
+## Iteration 4: Data Layer v1 (completed)
+
+- Introduced **dashboard config** (`config/dashboard-config.ts`) and rendering runtime (`components/Dashboard/DashboardGrid.tsx`).
+- Mission Control moved into a **single widget** (`components/MissionControl/MissionControlWidget.tsx`, `widgets/mission-control.tsx`).
+- Added **widget frame** UI with manual refresh + auto-refresh (`components/Dashboard/WidgetFrame.tsx`).
+- Implemented **widget-local refresh status** (refreshing/queued/last refreshed).
+- Added lightweight **client-side caching + request de-duping** for API fetches:
+  - `lib/cachedFetch.ts`
+  - Used in `hooks/useMissionControl.ts` with short TTL.
 
 ## Interruption safety
 
