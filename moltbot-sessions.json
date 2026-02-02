@@ -1,0 +1,4 @@
+[
+  { "agentName": "Tessa", "sessionKey": "agent:main:subagent:tessa-session" },
+  { "agentName": "Coder", "sessionKey": "agent:main:subagent:coder-session" }
+]

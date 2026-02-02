@@ -44,10 +44,27 @@
   - `hooks/useMissionControl.ts`: Data fetching + SSE subscription.
   - Components: `AgentsPanel`, `KanbanBoard` (with Blocked column), `ActivityFeed`.
   - Replaced `app/page.tsx` with Mission Control layout (bypassed generic widget registry for this feature).
-- **Decisions**:
   - Used `EventSource` for realtime updates.
   - Used global variable for `EventEmitter` (MVP/Local dev approach; would need Redis for scale).
   - Database file `dev.db` ignored in git.
+
+## Feature 2: Enhanced Mission Control
+
+- **UI**: 
+  - `TaskDetailDrawer`: Slide-over for task details and comments.
+  - `AgentsPanel`: Added session key editing and notification badges.
+  - `KanbanBoard`: Added click handling to open drawer.
+- **Backend**:
+  - Updated Prisma Schema: Added `Comment`, `Notification`, and `sessionKey` to `Agent`.
+  - New Routes: 
+    - `/api/tasks/[id]/comments` (GET/POST)
+    - `/api/notifications` (GET/PATCH)
+    - `/api/sync/moltbot` (Stub for syncing sessions)
+    - `/api/agents/[id]` (PATCH)
+  - Updated SSE: Added `COMMENT` and `NOTIFICATION` channels.
+- **Logic**:
+  - Mentions (@Name) in comments trigger notifications for agents.
+  - Stub sync mechanism checks `moltbot-sessions.json`.
 
 ## Interruption safety
 
