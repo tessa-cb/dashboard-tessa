@@ -7,7 +7,7 @@ export async function GET(request: Request) {
 
   const customReadable = new ReadableStream({
     start(controller) {
-      const onActivity = (data: any) => {
+      const onActivity = (data: unknown) => {
         try {
           const message = `data: ${JSON.stringify(data)}\n\n`;
           controller.enqueue(encoder.encode(message));

@@ -10,9 +10,9 @@ export default function ActivityFeed({
     <div className="bg-white rounded-lg shadow p-4 h-full flex flex-col">
       <h2 className="text-xl font-bold mb-4">Activity Feed</h2>
       <div className="flex-1 overflow-y-auto space-y-3 max-h-[600px]">
-        {activities.map((activity) => (
+        {activities.map((activity, idx) => (
           <div
-            key={activity.id || Math.random()}
+            key={activity.id ?? `${activity.type}-${activity.createdAt}-${idx}`}
             className="text-sm border-b pb-2"
           >
             <div className="flex justify-between text-xs text-gray-500 mb-1">

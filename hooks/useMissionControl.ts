@@ -36,7 +36,7 @@ export function useMissionControl() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [connected, setConnected] = useState(false);
-  const [lastEvent, setLastEvent] = useState<any>(null);
+  const [lastEvent, setLastEvent] = useState<unknown>(null);
 
   const fetchData = async () => {
     try {
@@ -55,6 +55,7 @@ export function useMissionControl() {
   // No, just fetch.
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, []);
 

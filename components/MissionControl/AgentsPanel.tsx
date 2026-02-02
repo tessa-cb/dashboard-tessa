@@ -4,7 +4,9 @@ import { Agent } from "@/hooks/useMissionControl";
 
 export default function AgentsPanel({ agents }: { agents: Agent[] }) {
   const [editingAgent, setEditingAgent] = useState<string | null>(null);
-  const [notifications, setNotifications] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState<
+    { id: string; message: string }[]
+  >([]);
   const [viewingNotifications, setViewingNotifications] = useState<
     string | null
   >(null);

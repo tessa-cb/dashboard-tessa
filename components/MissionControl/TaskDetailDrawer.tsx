@@ -19,7 +19,7 @@ export default function TaskDetailDrawer({
   taskId: string;
   onClose: () => void;
   agents: Agent[];
-  lastEvent: any;
+  lastEvent: unknown;
 }) {
   const [task, setTask] = useState<Task | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -41,8 +41,16 @@ export default function TaskDetailDrawer({
   // Listen to events
   useEffect(() => {
     if (!lastEvent) return;
-    if (lastEvent.type === "comment_created" && lastEvent.taskId === taskId) {
-      setComments((prev) => [...prev, lastEvent.comment]);
+
+    const evt = lastEvent as {
+      type?: string;
+      taskId?: string;
+      comment?: Comment;
+    };
+
+    if (evt.type === "comment_created" && evt.taskId === taskId && evt.comment) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setComments((prev) => [...prev, evt.comment as Comment]);
     }
   }, [lastEvent, taskId]);
 

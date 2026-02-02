@@ -1,5 +1,6 @@
 import { PlaceholderOne } from "@/widgets/placeholder-one";
 import { PlaceholderTwo } from "@/widgets/placeholder-two";
+import MissionControl from "@/widgets/mission-control";
 import { ComponentType } from "react";
 
 export interface Widget {
@@ -9,6 +10,11 @@ export interface Widget {
 }
 
 export const widgetRegistry: Widget[] = [
+  {
+    id: "mission-control",
+    title: "Mission Control",
+    component: MissionControl,
+  },
   {
     id: "placeholder-one",
     title: "Placeholder One",

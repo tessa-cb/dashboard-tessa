@@ -4,7 +4,7 @@ import { events, CHANNELS } from "./events";
 export async function logActivity(
   type: string,
   message: string,
-  metadata?: any,
+  metadata?: unknown,
 ) {
   try {
     const activity = await prisma.activity.create({
