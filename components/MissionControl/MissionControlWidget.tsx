@@ -9,8 +9,10 @@ import TaskDetailDrawer from "@/components/MissionControl/TaskDetailDrawer";
 
 export default function MissionControlWidget({
   refreshKey,
+  onRefreshed,
 }: {
   refreshKey: number;
+  onRefreshed?: (refreshKey: number) => void;
 }) {
   const {
     agents,
@@ -21,7 +23,7 @@ export default function MissionControlWidget({
     moveTask,
     assignTask,
     createTask,
-  } = useMissionControl({ refreshKey });
+  } = useMissionControl({ refreshKey, onRefreshed });
 
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 

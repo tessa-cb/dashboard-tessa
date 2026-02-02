@@ -33,8 +33,10 @@ export type Activity = {
 
 export function useMissionControl({
   refreshKey,
+  onRefreshed,
 }: {
   refreshKey?: number;
+  onRefreshed?: (refreshKey: number) => void;
 } = {}) {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -59,9 +61,10 @@ export function useMissionControl({
   // No, just fetch.
 
   useEffect(() => {
+    const key = refreshKey ?? 0;
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchData();
-  }, [refreshKey]);
+    fetchData().finally(() => onRefreshed?.(key));
+  }, [refreshKey, onRefreshed]);
 
   useEffect(() => {
     let eventSource: EventSource | null = null;

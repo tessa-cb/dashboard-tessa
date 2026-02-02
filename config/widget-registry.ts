@@ -6,7 +6,10 @@ import { ComponentType } from "react";
 export interface Widget {
   id: string;
   title: string;
-  component: ComponentType<{ refreshKey: number }>;
+  component: ComponentType<{
+    refreshKey: number;
+    onRefreshed?: (refreshKey: number) => void;
+  }>;
 }
 
 export const widgetRegistry: Widget[] = [
