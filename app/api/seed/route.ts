@@ -4,13 +4,17 @@ import { logActivity } from "@/lib/activity";
 
 export async function POST() {
   try {
-    // Clean up
+    // Clean up (order matters for FK constraints)
+    await prisma.notification.deleteMany();
+    await prisma.comment.deleteMany();
     await prisma.activity.deleteMany();
     await prisma.task.deleteMany();
     await prisma.agent.deleteMany();
 
     // Agents
     const agentsData = [
+      { name: "Tessa", role: "AI Assistant", status: "idle" },
+      { name: "Coder", role: "Software Engineer", status: "working" },
       { name: "Sarah Connor", role: "Security Specialist", status: "idle" },
       { name: "Neo", role: "Software Engineer", status: "working" },
       { name: "Trinity", role: "DevOps", status: "idle" },

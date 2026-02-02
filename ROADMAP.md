@@ -24,30 +24,30 @@ Build an iterative personal dashboard (similar vibe to the referenced tweet) wit
    - [x] Task Detail Drawer (Right-side slide-over)
    - [x] Comments Thread & Composer
    - [x] @Mentions & Notifications system
-   - [x] Moltbot Session Mapping (Stub + UI)
+   - [x] Moltbot Session Mapping (Manual UI)
 
 4. **Data Layer v1**
    - [ ] Widget config schema
    - [ ] Local mock data + caching
    - [ ] Refresh controls (manual + interval)
 
-4. **Core Widgets (pick 3–5)**
+5. **Core Widgets (pick 3–5)**
    - [ ] Today/agenda
    - [ ] Tasks/todos
    - [ ] Focus timer / “deep work”
    - [ ] Weather
    - [ ] Notes
 
-5. **Persistence**
+6. **Persistence**
    - [ ] Store widget layout + settings (localStorage first, then DB)
 
-6. **Auth + Integrations**
+7. **Auth + Integrations**
    - [ ] OAuth for providers (Google/Notion/GitHub/etc.)
 
-7. **Theming + UX polish**
+8. **Theming + UX polish**
    - [ ] Dark mode, compact mode, keyboard shortcuts
 
-8. **Deploy**
+9. **Deploy**
    - [ ] Vercel/Fly/Render + env management
 
 ## Working agreement

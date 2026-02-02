@@ -50,21 +50,20 @@
 
 ## Feature 2: Enhanced Mission Control
 
-- **UI**: 
+- **UI**:
   - `TaskDetailDrawer`: Slide-over for task details and comments.
   - `AgentsPanel`: Added session key editing and notification badges.
   - `KanbanBoard`: Added click handling to open drawer.
 - **Backend**:
   - Updated Prisma Schema: Added `Comment`, `Notification`, and `sessionKey` to `Agent`.
-  - New Routes: 
+  - New Routes:
     - `/api/tasks/[id]/comments` (GET/POST)
     - `/api/notifications` (GET/PATCH)
-    - `/api/sync/moltbot` (Stub for syncing sessions)
     - `/api/agents/[id]` (PATCH)
   - Updated SSE: Added `COMMENT` and `NOTIFICATION` channels.
 - **Logic**:
   - Mentions (@Name) in comments trigger notifications for agents.
-  - Stub sync mechanism checks `moltbot-sessions.json`.
+  - Manual session mapping via Agent Panel (removed auto-sync per latest spec).
 
 ## Interruption safety
 
