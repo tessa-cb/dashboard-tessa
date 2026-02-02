@@ -6,6 +6,7 @@ export default function WidgetFrame({
   title,
   children,
   onRefresh,
+  onRemove,
   isRefreshing = false,
   hasQueuedRefresh = false,
   lastRefreshedAt,
@@ -14,6 +15,7 @@ export default function WidgetFrame({
   title: string;
   children: React.ReactNode;
   onRefresh: () => void;
+  onRemove?: () => void;
   isRefreshing?: boolean;
   hasQueuedRefresh?: boolean;
   lastRefreshedAt?: number;
@@ -48,6 +50,15 @@ export default function WidgetFrame({
           </div>
         </div>
         <div className="flex items-center gap-2">
+          {onRemove ? (
+            <button
+              onClick={onRemove}
+              className="text-xs px-2 py-1 rounded border bg-white hover:bg-gray-50"
+              title="Remove widget"
+            >
+              Remove
+            </button>
+          ) : null}
           <select
             className="text-xs border rounded px-2 py-1 bg-white"
             value={String(intervalSec)}

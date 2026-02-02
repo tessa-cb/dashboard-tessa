@@ -5,7 +5,13 @@ import { DashboardConfig } from "@/config/dashboard-config";
 import { widgetRegistry } from "@/config/widget-registry";
 import WidgetFrame from "@/components/Dashboard/WidgetFrame";
 
-export default function DashboardGrid({ config }: { config: DashboardConfig }) {
+export default function DashboardGrid({
+  config,
+  onRemoveWidget,
+}: {
+  config: DashboardConfig;
+  onRemoveWidget?: (instanceId: string) => void;
+}) {
   const [refreshKeys, setRefreshKeys] = useState<Record<string, number>>({});
   const [refreshing, setRefreshing] = useState<Record<string, boolean>>({});
   const [queued, setQueued] = useState<Record<string, boolean>>({});
@@ -74,6 +80,11 @@ export default function DashboardGrid({ config }: { config: DashboardConfig }) {
             key={w.instanceId}
             title={title}
             onRefresh={() => refresh(w.instanceId)}
+            onRemove={
+              onRemoveWidget
+                ? () => onRemoveWidget(w.instanceId)
+                : undefined
+            }
             isRefreshing={isRefreshing}
             hasQueuedRefresh={hasQueuedRefresh}
             lastRefreshedAt={last}

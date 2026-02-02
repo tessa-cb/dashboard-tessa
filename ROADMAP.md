@@ -39,7 +39,7 @@ Build an iterative personal dashboard (similar vibe to the referenced tweet) wit
    - [ ] Notes
 
 6. **Persistence**
-   - [ ] Store widget layout + settings (localStorage first, then DB)
+   - [x] Store widget layout + settings (localStorage first, then DB)
 
 7. **Auth + Integrations**
    - [ ] OAuth for providers (Google/Notion/GitHub/etc.)

@@ -1,4 +1,4 @@
-export type WidgetId = "mission-control";
+export type WidgetId = "mission-control" | "placeholder-one" | "placeholder-two";
 
 export interface DashboardWidgetInstance {
   instanceId: string;
