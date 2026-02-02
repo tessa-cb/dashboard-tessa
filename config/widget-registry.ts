@@ -1,6 +1,9 @@
 import { PlaceholderOne } from "@/widgets/placeholder-one";
 import { PlaceholderTwo } from "@/widgets/placeholder-two";
 import MissionControl from "@/widgets/mission-control";
+import Agenda from "@/widgets/agenda";
+import FocusTimer from "@/widgets/focus-timer";
+import Todos from "@/widgets/todos";
 import { ComponentType } from "react";
 
 export interface Widget {
@@ -17,6 +20,21 @@ export const widgetRegistry: Widget[] = [
     id: "mission-control",
     title: "Mission Control",
     component: MissionControl,
+  },
+  {
+    id: "agenda",
+    title: "Agenda",
+    component: Agenda,
+  },
+  {
+    id: "focus-timer",
+    title: "Focus Timer",
+    component: FocusTimer,
+  },
+  {
+    id: "todos",
+    title: "Tasks / Todos",
+    component: Todos,
   },
   {
     id: "placeholder-one",

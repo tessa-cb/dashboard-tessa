@@ -32,9 +32,9 @@ Build an iterative personal dashboard (similar vibe to the referenced tweet) wit
    - [x] Refresh controls (manual + interval)
 
 5. **Core Widgets (pick 3–5)**
-   - [ ] Today/agenda
-   - [ ] Tasks/todos
-   - [ ] Focus timer / “deep work”
+   - [x] Today/agenda
+   - [x] Tasks/todos
+   - [x] Focus timer / “deep work”
    - [ ] Weather
    - [ ] Notes
 

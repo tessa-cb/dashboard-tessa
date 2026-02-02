@@ -1,4 +1,10 @@
-export type WidgetId = "mission-control" | "placeholder-one" | "placeholder-two";
+export type WidgetId =
+  | "mission-control"
+  | "agenda"
+  | "focus-timer"
+  | "todos"
+  | "placeholder-one"
+  | "placeholder-two";
 
 export interface DashboardWidgetInstance {
   instanceId: string;

@@ -58,7 +58,14 @@ export function useDashboardConfig() {
   }, []);
 
   const widgetIds = useMemo<WidgetId[]>(
-    () => ["mission-control", "placeholder-one", "placeholder-two"],
+    () => [
+      "mission-control",
+      "agenda",
+      "focus-timer",
+      "todos",
+      "placeholder-one",
+      "placeholder-two",
+    ],
     [],
   );
 
