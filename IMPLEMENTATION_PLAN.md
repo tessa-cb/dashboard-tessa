@@ -14,11 +14,19 @@
 - `config/` widget registry + schema
 
 ## Iteration 0 checklist (scaffold)
-- [ ] Next.js app created
-- [ ] Tailwind configured
-- [ ] Basic dashboard page with grid
-- [ ] Widget registry with 1–2 sample widgets
-- [ ] Dev scripts (lint/format)
+- [x] Next.js app created
+- [x] Tailwind configured
+- [x] Basic dashboard page with grid
+- [x] Widget registry with 1–2 sample widgets
+- [x] Dev scripts (lint/format)
+
+## Scaffold Notes
+- initialized with Next.js 16 (Canary/Latest?) + React 19 + Tailwind 4 (via `@tailwindcss/postcss`).
+- `widgets/` folder created for widget components.
+- `config/widget-registry.ts` created for mapping IDs to components.
+- Added `prettier` and `format` script.
+- Used `app/page.tsx` for the main dashboard grid.
+- NOTE: Tailwind v4 usage implies standard `postcss` config, might differ slightly from v3 `tailwind.config.js`. It uses CSS-first configuration.
 
 ## Interruption safety
 - Keep tasks small and PR-like.
