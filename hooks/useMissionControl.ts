@@ -58,7 +58,9 @@ export function useMissionControl() {
 
     // Helper to start connection with retry
     const connect = () => {
-        eventSource = new EventSource('/api/stream')
+        // Safari can be picky about relative EventSource URLs in some setups
+        const streamUrl = new URL('/api/stream', window.location.origin)
+        eventSource = new EventSource(streamUrl.toString())
         
         eventSource.onopen = () => setConnected(true)
         
@@ -100,6 +102,7 @@ export function useMissionControl() {
   const moveTask = async (taskId: string, status: string) => {
       await fetch(`/api/tasks/${taskId}`, {
           method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status })
       })
       // Optimistic update?
@@ -109,6 +112,7 @@ export function useMissionControl() {
   const assignTask = async (taskId: string, agentId: string | null) => {
        await fetch(`/api/tasks/${taskId}`, {
           method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ agentId, status: agentId ? 'assigned' : 'inbox' })
       })
       fetchData() // Refresh to get relation update
@@ -117,6 +121,7 @@ export function useMissionControl() {
   const createTask = async (title: string) => {
       await fetch('/api/tasks', {
           method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ title })
       })
       fetchData()
