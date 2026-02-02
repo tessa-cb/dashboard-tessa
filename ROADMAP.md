@@ -1,9 +1,11 @@
 # Dashboard Tessa — Roadmap
 
 ## Goal
+
 Build an iterative personal dashboard (similar vibe to the referenced tweet) with modular widgets and a clean “single pane” UI.
 
 ## Iterations (feature batches)
+
 0. **Scaffold + DX**
    - [x] Repo, lint/format, basic layout, widget framework.
 
@@ -12,7 +14,13 @@ Build an iterative personal dashboard (similar vibe to the referenced tweet) wit
    - [ ] Sidebar/topbar
    - [x] Static sample widgets (placeholders)
 
-2. **Data Layer v1**
+2. **Feature 1: Mission Control MVP**
+   - [x] SQLite + Prisma setup (Agents, Tasks, Activity)
+   - [x] Backend API (CRUD + SSE Realtime Stream)
+   - [x] Frontend UI (Agents Panel, Kanban, Activity Feed)
+   - [x] Realtime updates via Server-Sent Events
+
+3. **Data Layer v1**
    - [ ] Widget config schema
    - [ ] Local mock data + caching
    - [ ] Refresh controls (manual + interval)
@@ -37,4 +45,5 @@ Build an iterative personal dashboard (similar vibe to the referenced tweet) wit
    - [ ] Vercel/Fly/Render + env management
 
 ## Working agreement
+
 - **Before each new feature:** we do a quick design discussion (scope + UX + data source + edge cases) and only then implement.

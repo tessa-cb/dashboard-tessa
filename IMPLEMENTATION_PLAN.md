@@ -1,12 +1,14 @@
 # Dashboard Tessa — Implementation Plan
 
 ## Stack (proposed, confirm)
+
 - Next.js (App Router) + TypeScript
 - Tailwind CSS
 - shadcn/ui (optional) for quick dashboard primitives
 - Zustand (or React context) for client state
 
 ## Architecture
+
 - `/app` routes
 - `components/` reusable UI
 - `widgets/` each widget is a module: UI + data loader + settings
@@ -14,6 +16,7 @@
 - `config/` widget registry + schema
 
 ## Iteration 0 checklist (scaffold)
+
 - [x] Next.js app created
 - [x] Tailwind configured
 - [x] Basic dashboard page with grid
@@ -21,6 +24,7 @@
 - [x] Dev scripts (lint/format)
 
 ## Scaffold Notes
+
 - initialized with Next.js 16 (Canary/Latest?) + React 19 + Tailwind 4 (via `@tailwindcss/postcss`).
 - `widgets/` folder created for widget components.
 - `config/widget-registry.ts` created for mapping IDs to components.
@@ -28,13 +32,32 @@
 - Used `app/page.tsx` for the main dashboard grid.
 - NOTE: Tailwind v4 usage implies standard `postcss` config, might differ slightly from v3 `tailwind.config.js`. It uses CSS-first configuration.
 
+## Feature 1: Mission Control MVP
+
+- **Stack**: SQLite + Prisma, SSE for realtime.
+- **Backend**:
+  - `prisma/schema.prisma`: Models for `Agent`, `Task`, `Activity`.
+  - `lib/prisma.ts`: Prisma Client singleton.
+  - `lib/events.ts`: Global EventEmitter for SSE.
+  - API Routes: `/api/agents`, `/api/tasks` (CRUD), `/api/stream` (SSE), `/api/seed`.
+- **Frontend**:
+  - `hooks/useMissionControl.ts`: Data fetching + SSE subscription.
+  - Components: `AgentsPanel`, `KanbanBoard`, `ActivityFeed`.
+  - Replaced `app/page.tsx` with Mission Control layout (bypassed generic widget registry for this feature).
+- **Decisions**:
+  - Used `EventSource` for realtime updates.
+  - Used global variable for `EventEmitter` (MVP/Local dev approach; would need Redis for scale).
+  - Database file `dev.db` ignored in git.
+
 ## Interruption safety
+
 - Keep tasks small and PR-like.
 - Every batch ends with:
   - Updated ROADMAP.md checkmarks
   - Notes in IMPLEMENTATION_PLAN.md (decisions + next steps)
 
 ## Open questions to decide with Mamy
+
 1. What are the **widgets** we want in the MVP?
 2. Is the dashboard **local-only** (no auth) first, or do we integrate a provider immediately?
 3. Preferred deployment target (or keep local)?
