@@ -7,7 +7,11 @@ import KanbanBoard from "@/components/MissionControl/KanbanBoard";
 import ActivityFeed from "@/components/MissionControl/ActivityFeed";
 import TaskDetailDrawer from "@/components/MissionControl/TaskDetailDrawer";
 
-export default function MissionControlWidget() {
+export default function MissionControlWidget({
+  refreshKey,
+}: {
+  refreshKey: number;
+}) {
   const {
     agents,
     tasks,
@@ -17,25 +21,22 @@ export default function MissionControlWidget() {
     moveTask,
     assignTask,
     createTask,
-  } = useMissionControl();
+  } = useMissionControl({ refreshKey });
 
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
-      {/* Widget Header */}
-      <div className="p-4 border-b flex justify-between items-center">
-        <div>
-          <h2 className="text-lg font-bold text-gray-900">Mission Control</h2>
-          <p className="text-xs text-gray-500">Real-time Operations</p>
-        </div>
+    <div className="bg-gray-100">
+      <div className="p-4 border-b flex justify-between items-center bg-white">
         <div className="flex items-center gap-3">
           <div
             className={`px-3 py-1 rounded-full text-xs font-bold ${connected ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}
-            title={lastEvent ? `Last event: ${lastEvent}` : undefined}
+            title={lastEvent ? `Last event: ${String(lastEvent)}` : undefined}
           >
             {connected ? "● LIVE" : "○ DISCONNECTED"}
           </div>
+        </div>
+        <div className="flex items-center gap-2">
           <button
             onClick={() =>
               fetch("/api/seed", { method: "POST" }).then(() =>
@@ -58,8 +59,7 @@ export default function MissionControlWidget() {
         </div>
       </div>
 
-      {/* Widget Body */}
-      <div className="p-4 bg-gray-100">
+      <div className="p-4">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-1 space-y-6">
             <AgentsPanel agents={agents} />

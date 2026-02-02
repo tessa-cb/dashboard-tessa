@@ -31,7 +31,11 @@ export type Activity = {
   metadata?: string;
 };
 
-export function useMissionControl() {
+export function useMissionControl({
+  refreshKey,
+}: {
+  refreshKey?: number;
+} = {}) {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -57,7 +61,7 @@ export function useMissionControl() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
-  }, []);
+  }, [refreshKey]);
 
   useEffect(() => {
     let eventSource: EventSource | null = null;
