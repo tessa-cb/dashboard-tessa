@@ -6,6 +6,7 @@ const COLUMNS = [
   { id: 'assigned', label: 'Assigned' },
   { id: 'in_progress', label: 'In Progress' },
   { id: 'review', label: 'Review' },
+  { id: 'blocked', label: 'Blocked' },
   { id: 'done', label: 'Done' }
 ]
 

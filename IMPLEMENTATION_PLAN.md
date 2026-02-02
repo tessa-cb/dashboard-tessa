@@ -42,7 +42,7 @@
   - API Routes: `/api/agents`, `/api/tasks` (CRUD), `/api/stream` (SSE), `/api/seed`.
 - **Frontend**:
   - `hooks/useMissionControl.ts`: Data fetching + SSE subscription.
-  - Components: `AgentsPanel`, `KanbanBoard`, `ActivityFeed`.
+  - Components: `AgentsPanel`, `KanbanBoard` (with Blocked column), `ActivityFeed`.
   - Replaced `app/page.tsx` with Mission Control layout (bypassed generic widget registry for this feature).
 - **Decisions**:
   - Used `EventSource` for realtime updates.
