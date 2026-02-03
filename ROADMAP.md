@@ -50,6 +50,11 @@ Build an iterative personal dashboard (similar vibe to the referenced tweet) wit
 9. **Deploy**
    - [ ] Vercel/Fly/Render + env management
 
+10. **Testing**
+    - [x] Vitest setup (unit + integration)
+    - [x] API route coverage
+    - [x] Hooks + lib utilities coverage
+
 ## Working agreement
 
 - **Before each new feature:** we do a quick design discussion (scope + UX + data source + edge cases) and only then implement.

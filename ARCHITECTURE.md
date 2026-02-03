@@ -130,6 +130,15 @@ Notes:
 - This is intentionally “manual / local-first” for now.
 - Later we can swap the file for a real Moltbot API integration.
 
+## Testing
+
+- Runner: Vitest (`npm test`)
+- Test DB: SQLite `test.db` created via Prisma migrations
+- Environments:
+  - `node` for API/lib/integration tests
+  - `jsdom` for hooks and localStorage
+- Setup code: `tests/setup-env.ts`, `tests/setup-db.ts`
+
 ## Key interaction flows
 
 ### A) Load dashboard

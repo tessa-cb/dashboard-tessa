@@ -81,6 +81,15 @@
   - Updated ROADMAP.md checkmarks
   - Notes in IMPLEMENTATION_PLAN.md (decisions + next steps)
 
+## Testing (added)
+
+- Runner: Vitest
+- Scope: API routes, hooks, lib utilities, and integration paths with SQLite + Prisma
+- Test DB: `test.db` created via `prisma migrate deploy` in test setup
+- Environments:
+  - `node` for API/lib/integration tests
+  - `jsdom` for hooks and localStorage usage
+
 ## Open questions to decide with Mamy
 
 1. What are the **widgets** we want in the MVP?

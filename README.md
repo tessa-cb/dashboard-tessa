@@ -15,6 +15,16 @@ npx prisma migrate dev
 npm run dev
 ```
 
+## Testing
+
+```bash
+npm test
+```
+
+Notes
+- Tests use Vitest + SQLite `test.db` with Prisma migrations.
+- Hooks tests run in `jsdom`; API + lib tests run in `node`.
+
 If you use `nvm`:
 
 ```bash
