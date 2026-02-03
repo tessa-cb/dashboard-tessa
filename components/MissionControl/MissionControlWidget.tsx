@@ -28,11 +28,15 @@ export default function MissionControlWidget({
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
   return (
-    <div className="bg-gray-100">
-      <div className="p-4 border-b flex justify-between items-center bg-white">
+    <div className="bg-surface-2">
+      <div className="p-4 compact:p-3 border-b border-border flex justify-between items-center bg-surface">
         <div className="flex items-center gap-3">
           <div
-            className={`px-3 py-1 rounded-full text-xs font-bold ${connected ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}
+            className={`px-3 py-1 rounded-full text-xs font-semibold border ${
+              connected
+                ? "bg-success/15 text-success border-success/30"
+                : "bg-danger/15 text-danger border-danger/30"
+            }`}
             title={lastEvent ? `Last event: ${String(lastEvent)}` : undefined}
           >
             {connected ? "● LIVE" : "○ DISCONNECTED"}
@@ -45,7 +49,7 @@ export default function MissionControlWidget({
                 window.location.reload(),
               )
             }
-            className="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700"
+            className="bg-foreground text-background px-3 py-1.5 rounded-md text-sm hover:brightness-110 compact:px-2 compact:py-1"
           >
             Reset / Seed DB
           </button>
@@ -54,20 +58,20 @@ export default function MissionControlWidget({
               const title = prompt("Task Title:");
               if (title) createTask(title);
             }}
-            className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-500"
+            className="bg-primary text-primary-foreground px-3 py-1.5 rounded-md text-sm hover:brightness-110 compact:px-2 compact:py-1"
           >
             + New Task
           </button>
         </div>
       </div>
 
-      <div className="p-4">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div className="lg:col-span-1 space-y-6">
+      <div className="p-4 compact:p-3">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 compact:gap-4">
+          <div className="lg:col-span-1 space-y-6 compact:space-y-4">
             <AgentsPanel agents={agents} />
           </div>
 
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6 compact:space-y-4">
             <KanbanBoard
               tasks={tasks}
               agents={agents}
@@ -77,7 +81,7 @@ export default function MissionControlWidget({
             />
           </div>
 
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-6 compact:space-y-4">
             <ActivityFeed activities={activities} />
           </div>
         </div>

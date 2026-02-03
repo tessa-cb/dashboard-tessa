@@ -25,6 +25,13 @@ Notes
 - Tests use Vitest + SQLite `test.db` with Prisma migrations.
 - Hooks tests run in `jsdom`; API + lib tests run in `node`.
 
+## UX
+
+- Theme: system/light/dark (`D` to cycle)
+- Density: comfortable/compact (`C` to toggle)
+- Shortcuts help: `?` (Shift + `/`)
+- Refresh all widgets: `R`
+
 If you use `nvm`:
 
 ```bash

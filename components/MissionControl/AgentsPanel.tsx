@@ -30,13 +30,13 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "working":
-        return "bg-green-100 text-green-800";
+        return "bg-success/15 text-success border-success/30";
       case "idle":
-        return "bg-gray-100 text-gray-800";
+        return "bg-muted text-foreground border-border";
       case "paused":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-warning/15 text-warning border-warning/30";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-muted text-foreground border-border";
     }
   };
 
@@ -90,22 +90,22 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4">
+    <div className="bg-surface rounded-xl border border-border shadow-sm p-4 compact:p-3">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">Agents</h2>
+        <h2 className="text-xl font-semibold text-foreground">Agents</h2>
         <button
           onClick={syncMoltbot}
           disabled={syncing}
-          className="text-xs bg-purple-600 text-white px-2 py-1 rounded hover:bg-purple-500 disabled:opacity-50"
+          className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-md hover:brightness-110 disabled:opacity-50"
         >
           {syncing ? "Syncing..." : "Sync Moltbot"}
         </button>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-3 compact:space-y-2">
         {agents.map((agent) => (
           <div
             key={agent.id}
-            className="border rounded hover:bg-gray-50 transition-colors"
+            className="border border-border rounded-lg hover:bg-muted/60 transition-colors"
           >
             <div className="flex items-center justify-between p-2">
               <div
@@ -113,7 +113,7 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
                 onClick={() => toggleNotifications(agent)}
               >
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold">
                     {agent.avatar ? (
                       <img
                         src={agent.avatar}
@@ -131,13 +131,17 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
                   ) : null}
                 </div>
                 <div>
-                  <div className="font-semibold">{agent.name}</div>
-                  <div className="text-xs text-gray-500">{agent.role}</div>
+                  <div className="font-semibold text-foreground">
+                    {agent.name}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {agent.role}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span
-                  className={`px-2 py-1 rounded text-xs uppercase font-bold ${getStatusColor(agent.status)}`}
+                  className={`px-2 py-1 rounded-md text-xs uppercase font-semibold border ${getStatusColor(agent.status)}`}
                 >
                   {agent.status}
                 </span>
@@ -146,7 +150,7 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
                     e.stopPropagation();
                     startEdit(agent);
                   }}
-                  className="text-[10px] text-blue-600 underline"
+                  className="text-[10px] text-primary underline decoration-primary/60 underline-offset-2"
                 >
                   {agent.sessionKey ? "Key set" : "Set Key"}
                 </button>
@@ -155,9 +159,9 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
 
             {/* Edit Session Key */}
             {editingAgent === agent.id && (
-              <div className="p-2 border-t bg-gray-50">
+              <div className="p-2 border-t border-border bg-surface-2">
                 <input
-                  className="w-full text-xs border rounded p-1 mb-2 font-mono"
+                  className="w-full text-xs border border-border rounded-md p-2 mb-2 font-mono bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
                   value={tempKey}
                   onChange={(e) => setTempKey(e.target.value)}
                   placeholder="agent:main:subagent:..."
@@ -165,13 +169,13 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
                 <div className="flex justify-end gap-2">
                   <button
                     onClick={() => setEditingAgent(null)}
-                    className="text-xs text-gray-500"
+                    className="text-xs text-muted-foreground hover:text-foreground"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={() => saveKey(agent.id)}
-                    className="text-xs bg-blue-600 text-white px-2 py-1 rounded"
+                    className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-md hover:brightness-110"
                   >
                     Save
                   </button>
@@ -181,12 +185,12 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
 
             {/* Notifications List */}
             {viewingNotifications === agent.id && (
-              <div className="p-2 border-t bg-yellow-50">
-                <h4 className="text-xs font-bold mb-2 uppercase text-gray-500">
+              <div className="p-2 border-t border-border bg-warning/10">
+                <h4 className="text-xs font-semibold mb-2 uppercase text-muted-foreground">
                   Notifications
                 </h4>
                 {notifications.length === 0 ? (
-                  <div className="text-xs text-gray-400">
+                  <div className="text-xs text-muted-foreground">
                     No unread notifications
                   </div>
                 ) : (
@@ -194,12 +198,12 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
                     {notifications.map((n) => (
                       <div
                         key={n.id}
-                        className="flex justify-between items-start text-xs bg-white p-2 rounded border"
+                        className="flex justify-between items-start text-xs bg-surface p-2 rounded-md border border-border"
                       >
-                        <span>{n.message}</span>
+                        <span className="text-foreground">{n.message}</span>
                         <button
                           onClick={() => markRead(n.id)}
-                          className="text-blue-600 hover:text-blue-800 ml-2"
+                          className="text-primary hover:brightness-125 ml-2"
                         >
                           ✓
                         </button>
@@ -212,7 +216,7 @@ export default function AgentsPanel({ agents }: { agents: Agent[] }) {
           </div>
         ))}
         {agents.length === 0 && (
-          <div className="text-gray-400 text-sm">No agents online.</div>
+          <div className="text-muted-foreground text-sm">No agents online.</div>
         )}
       </div>
     </div>

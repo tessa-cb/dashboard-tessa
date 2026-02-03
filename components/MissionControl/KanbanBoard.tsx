@@ -24,27 +24,31 @@ export default function KanbanBoard({
   onTaskClick: (id: string) => void;
 }) {
   return (
-    <div className="bg-white rounded-lg shadow p-4 overflow-x-auto">
-      <h2 className="text-xl font-bold mb-4">Tasks</h2>
-      <div className="flex gap-4 min-w-[800px]">
+    <div className="bg-surface rounded-xl border border-border shadow-sm p-4 compact:p-3 overflow-x-auto">
+      <h2 className="text-xl font-semibold mb-4 text-foreground compact:mb-3">
+        Tasks
+      </h2>
+      <div className="flex gap-4 compact:gap-3 min-w-[800px]">
         {COLUMNS.map((col) => (
           <div
             key={col.id}
-            className="flex-1 min-w-[200px] bg-gray-50 rounded p-2"
+            className="flex-1 min-w-[200px] bg-surface-2 rounded-lg border border-border p-2 compact:p-1.5"
           >
-            <h3 className="font-semibold mb-2 text-sm text-gray-700 uppercase">
+            <h3 className="font-semibold mb-2 text-sm text-muted-foreground uppercase compact:mb-1.5">
               {col.label}
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-2 compact:space-y-1.5">
               {tasks
                 .filter((t) => t.status === col.id)
                 .map((task) => (
                   <div
                     key={task.id}
-                    className="bg-white p-3 rounded shadow-sm border border-gray-100 cursor-pointer hover:border-blue-300 transition-colors"
+                    className="bg-surface p-3 compact:p-2 rounded-lg shadow-sm border border-border cursor-pointer hover:border-primary/50 transition-colors"
                     onClick={() => onTaskClick(task.id)}
                   >
-                    <div className="font-medium text-sm mb-1">{task.title}</div>
+                    <div className="font-medium text-sm mb-1 text-foreground">
+                      {task.title}
+                    </div>
 
                     {/* Controls */}
                     <div
@@ -52,7 +56,7 @@ export default function KanbanBoard({
                       onClick={(e) => e.stopPropagation()}
                     >
                       <select
-                        className="w-full text-xs border rounded p-1"
+                        className="w-full text-xs border border-border rounded-md p-1 bg-surface-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
                         value={task.status}
                         onChange={(e) => onMoveTask(task.id, e.target.value)}
                       >
@@ -64,7 +68,7 @@ export default function KanbanBoard({
                       </select>
 
                       <select
-                        className="w-full text-xs border rounded p-1"
+                        className="w-full text-xs border border-border rounded-md p-1 bg-surface-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
                         value={task.agentId || ""}
                         onChange={(e) =>
                           onAssignTask(task.id, e.target.value || null)

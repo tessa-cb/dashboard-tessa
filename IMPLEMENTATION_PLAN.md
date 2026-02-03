@@ -72,7 +72,13 @@
 - Implemented **widget-local refresh status** (refreshing/queued/last refreshed).
 - Added lightweight **client-side caching + request de-duping** for API fetches:
   - `lib/cachedFetch.ts`
-  - Used in `hooks/useMissionControl.ts` with short TTL.
+- Used in `hooks/useMissionControl.ts` with short TTL.
+
+## Iteration 8: Theming + UX polish (completed)
+
+- Theme preference: system/light/dark (persisted; applied before hydration)
+- Density preference: comfortable/compact (persisted)
+- Global keyboard shortcuts: help, refresh all, theme, density
 
 ## Interruption safety
 

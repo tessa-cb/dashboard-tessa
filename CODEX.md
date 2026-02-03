@@ -97,6 +97,18 @@ Notes
 ## Local Persistence
 - Dashboard layout and settings: `lib/dashboardStorage.ts` (localStorage key `dashboard-tessa:config:v1`)
 
+## UI Preferences
+- Theme: `system`/`light`/`dark` stored in localStorage key `dashboard-tessa:theme`
+- Density: `comfortable`/`compact` stored in localStorage key `dashboard-tessa:density`
+- Implementation:
+  - Storage + DOM application: `lib/uiPreferences.ts`
+  - Client state: `hooks/useUiPreferences.ts`
+  - Early boot script: `app/layout.tsx`
+  - Tokens + variants: `app/globals.css`
+- Keyboard shortcuts (global): `?` help, `R` refresh all, `D` cycle theme, `C` toggle compact
+  - Hook: `hooks/useDashboardShortcuts.ts`
+  - Help UI: `components/Dashboard/ShortcutsModal.tsx`
+
 ## Testing
 - Runner: Vitest
 - Test DB: `test.db` created via Prisma migrations (`tests/setup-db.ts`)

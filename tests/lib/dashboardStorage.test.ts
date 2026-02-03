@@ -9,7 +9,7 @@ import { DEFAULT_DASHBOARD_CONFIG } from "@/config/dashboard-config";
 
 describe("dashboardStorage", () => {
   beforeEach(() => {
-    window.localStorage.clear();
+    window.localStorage.removeItem("dashboard-tessa:config:v1");
   });
 
   it("saves and loads config", () => {

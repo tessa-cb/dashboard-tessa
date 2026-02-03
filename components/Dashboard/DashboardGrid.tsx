@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DashboardConfig } from "@/config/dashboard-config";
 import { widgetRegistry } from "@/config/widget-registry";
 import WidgetFrame from "@/components/Dashboard/WidgetFrame";
@@ -8,9 +8,11 @@ import WidgetFrame from "@/components/Dashboard/WidgetFrame";
 export default function DashboardGrid({
   config,
   onRemoveWidget,
+  refreshAllKey,
 }: {
   config: DashboardConfig;
   onRemoveWidget?: (instanceId: string) => void;
+  refreshAllKey?: number;
 }) {
   const [refreshKeys, setRefreshKeys] = useState<Record<string, number>>({});
   const [refreshing, setRefreshing] = useState<Record<string, boolean>>({});
@@ -21,32 +23,32 @@ export default function DashboardGrid({
 
   // Track the refreshKey that is currently "in-flight" for each instance.
   const inFlightKeyRef = useRef<Record<string, number>>({});
+  const refreshingRef = useRef<Record<string, boolean>>({});
 
-  const refresh = useCallback(
-    (instanceId: string) => {
-      const isRefreshing = refreshing[instanceId] ?? false;
-      if (isRefreshing) {
-        // Queue another refresh (but don't bump refreshKey yet)
-        setQueued((prev) => ({ ...prev, [instanceId]: true }));
-        return;
-      }
+  const refresh = useCallback((instanceId: string) => {
+    const isRefreshing = refreshingRef.current[instanceId] ?? false;
+    if (isRefreshing) {
+      // Queue another refresh (but don't bump refreshKey yet)
+      setQueued((prev) => ({ ...prev, [instanceId]: true }));
+      return;
+    }
 
-      setRefreshing((prev) => ({ ...prev, [instanceId]: true }));
+    refreshingRef.current[instanceId] = true;
+    setRefreshing((prev) => ({ ...prev, [instanceId]: true }));
 
-      setRefreshKeys((prev) => {
-        const nextKey = (prev[instanceId] ?? 0) + 1;
-        inFlightKeyRef.current[instanceId] = nextKey;
-        return { ...prev, [instanceId]: nextKey };
-      });
-    },
-    [refreshing],
-  );
+    setRefreshKeys((prev) => {
+      const nextKey = (prev[instanceId] ?? 0) + 1;
+      inFlightKeyRef.current[instanceId] = nextKey;
+      return { ...prev, [instanceId]: nextKey };
+    });
+  }, []);
 
   const onRefreshed = useCallback(
     (instanceId: string, key: number) => {
       if (inFlightKeyRef.current[instanceId] !== key) return;
 
       setLastRefreshedAt((prev) => ({ ...prev, [instanceId]: Date.now() }));
+      refreshingRef.current[instanceId] = false;
       setRefreshing((prev) => ({ ...prev, [instanceId]: false }));
 
       // If a refresh was queued while we were busy, run it now.
@@ -61,8 +63,17 @@ export default function DashboardGrid({
     [queued, refresh],
   );
 
+  useEffect(() => {
+    if (refreshAllKey === undefined) return;
+    for (const w of config.widgets) {
+      refresh(w.instanceId);
+    }
+    // We intentionally refresh only when `refreshAllKey` changes, not on config edits.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refreshAllKey]);
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 compact:space-y-4">
       {config.widgets.map((w) => {
         const widget = widgetRegistry.find((x) => x.id === w.widgetId);
         if (!widget) return null;

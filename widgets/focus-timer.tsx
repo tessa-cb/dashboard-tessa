@@ -144,15 +144,15 @@ export default function FocusTimerWidget({
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 compact:p-3">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-sm font-semibold text-gray-900">Pomodoro</div>
-          <div className="text-xs text-gray-500">
-            Phase: <span className="font-semibold">{phase}</span>
+          <div className="text-sm font-semibold text-foreground">Pomodoro</div>
+          <div className="text-xs text-muted-foreground">
+            Phase: <span className="font-semibold text-foreground">{phase}</span>
           </div>
         </div>
-        <div className="text-3xl font-mono font-bold text-gray-900">
+        <div className="text-3xl font-mono font-bold text-foreground">
           {label}
         </div>
       </div>
@@ -160,15 +160,17 @@ export default function FocusTimerWidget({
       <div className="mt-4 flex items-center gap-2">
         <button
           onClick={() => setRunning((r) => !r)}
-          className={`px-3 py-1 rounded text-sm text-white ${
-            running ? "bg-yellow-600 hover:bg-yellow-500" : "bg-green-600 hover:bg-green-500"
+          className={`px-3 py-1 rounded-md text-sm ${
+            running
+              ? "bg-warning text-warning-foreground hover:brightness-110"
+              : "bg-success text-success-foreground hover:brightness-110"
           }`}
         >
           {running ? "Pause" : "Start"}
         </button>
         <button
           onClick={reset}
-          className="px-3 py-1 rounded text-sm bg-gray-800 text-white hover:bg-gray-700"
+          className="px-3 py-1 rounded-md text-sm bg-foreground text-background hover:brightness-110"
         >
           Reset
         </button>
@@ -184,17 +186,17 @@ export default function FocusTimerWidget({
               running: false,
             });
           }}
-          className="px-3 py-1 rounded text-sm border bg-white hover:bg-gray-50"
+          className="px-3 py-1 rounded-md text-sm border border-border bg-surface-2 text-foreground hover:bg-muted"
         >
           Switch
         </button>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
-        <label className="text-xs text-gray-600">
+        <label className="text-xs text-muted-foreground">
           Focus (min)
           <input
-            className="mt-1 w-full border rounded px-2 py-1 text-sm"
+            className="mt-1 w-full border border-border rounded-md px-2 py-1 text-sm bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
             type="number"
             min={1}
             value={focusMin}
@@ -206,10 +208,10 @@ export default function FocusTimerWidget({
             }}
           />
         </label>
-        <label className="text-xs text-gray-600">
+        <label className="text-xs text-muted-foreground">
           Break (min)
           <input
-            className="mt-1 w-full border rounded px-2 py-1 text-sm"
+            className="mt-1 w-full border border-border rounded-md px-2 py-1 text-sm bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
             type="number"
             min={1}
             value={breakMin}

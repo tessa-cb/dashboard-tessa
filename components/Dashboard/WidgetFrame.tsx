@@ -35,11 +35,11 @@ export default function WidgetFrame({
   }, [intervalMs, onRefresh]);
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
-      <div className="p-3 border-b flex items-center justify-between">
+    <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
+      <div className="p-3 compact:p-2 border-b border-border flex items-center justify-between bg-surface/70">
         <div className="flex flex-col">
-          <div className="font-bold text-gray-900">{title}</div>
-          <div className="text-[11px] text-gray-500">
+          <div className="font-semibold text-foreground">{title}</div>
+          <div className="text-[11px] text-muted-foreground">
             {isRefreshing
               ? hasQueuedRefresh
                 ? "Refreshing… (1 queued)"
@@ -53,14 +53,14 @@ export default function WidgetFrame({
           {onRemove ? (
             <button
               onClick={onRemove}
-              className="text-xs px-2 py-1 rounded border bg-white hover:bg-gray-50"
+              className="text-xs px-2 py-1 rounded-md border border-border bg-surface-2 text-foreground hover:bg-muted"
               title="Remove widget"
             >
               Remove
             </button>
           ) : null}
           <select
-            className="text-xs border rounded px-2 py-1 bg-white"
+            className="text-xs border border-border rounded-md px-2 py-1 bg-surface-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
             value={String(intervalSec)}
             onChange={(e) => setIntervalSec(Number(e.target.value))}
             title="Auto refresh"
@@ -74,7 +74,7 @@ export default function WidgetFrame({
 
           <button
             onClick={onRefresh}
-            className="text-xs bg-gray-800 text-white px-2 py-1 rounded hover:bg-gray-700"
+            className="text-xs bg-foreground text-background px-2 py-1 rounded-md hover:brightness-110"
             title={
               isRefreshing
                 ? "Refresh in progress; another refresh will be queued"

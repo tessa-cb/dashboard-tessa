@@ -70,38 +70,38 @@ export default function TodosWidget({
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 compact:p-3">
       <div className="flex items-center justify-between mb-3">
         <div>
-          <div className="text-sm font-semibold text-gray-900">Tasks</div>
-          <div className="text-xs text-gray-500">
+          <div className="text-sm font-semibold text-foreground">Tasks</div>
+          <div className="text-xs text-muted-foreground">
             {counts.done}/{counts.total} done
           </div>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={add}
-            className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-500"
+            className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-md hover:brightness-110"
           >
             + Add
           </button>
           <button
             onClick={clearDone}
-            className="text-xs border px-2 py-1 rounded bg-white hover:bg-gray-50"
+            className="text-xs border border-border px-2 py-1 rounded-md bg-surface-2 text-foreground hover:bg-muted"
           >
             Clear done
           </button>
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 compact:space-y-1.5">
         {todos.length === 0 ? (
-          <div className="text-sm text-gray-400">No todos yet.</div>
+          <div className="text-sm text-muted-foreground">No todos yet.</div>
         ) : (
           todos.map((t) => (
             <label
               key={t.id}
-              className="flex items-center justify-between gap-3 border rounded bg-white p-2"
+              className="flex items-center justify-between gap-3 border border-border rounded-lg bg-surface p-2"
             >
               <div className="flex items-center gap-2">
                 <input
@@ -118,8 +118,8 @@ export default function TodosWidget({
                 <span
                   className={
                     t.done
-                      ? "text-sm text-gray-500 line-through"
-                      : "text-sm text-gray-900"
+                      ? "text-sm text-muted-foreground line-through"
+                      : "text-sm text-foreground"
                   }
                 >
                   {t.title}
@@ -131,7 +131,7 @@ export default function TodosWidget({
                   setTodos(updated);
                   saveTodos(updated);
                 }}
-                className="text-xs text-red-600 hover:underline"
+                className="text-xs text-danger hover:underline"
               >
                 Remove
               </button>

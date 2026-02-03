@@ -45,7 +45,9 @@ Build an iterative personal dashboard (similar vibe to the referenced tweet) wit
    - [ ] OAuth for providers (Google/Notion/GitHub/etc.)
 
 8. **Theming + UX polish**
-   - [ ] Dark mode, compact mode, keyboard shortcuts
+   - [x] Dark mode (system/light/dark)
+   - [x] Compact mode (density toggle)
+   - [x] Keyboard shortcuts (help, refresh, theme, density)
 
 9. **Deploy**
    - [ ] Vercel/Fly/Render + env management

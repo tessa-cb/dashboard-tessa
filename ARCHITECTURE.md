@@ -36,6 +36,7 @@ Responsibilities:
 - Renders the dashboard shell + widgets.
 - Calls backend APIs for CRUD.
 - Subscribes to realtime updates via Server-Sent Events (SSE).
+- Applies UI preferences (theme + density) and global keyboard shortcuts.
 
 Key pieces:
 - **Dashboard runtime**

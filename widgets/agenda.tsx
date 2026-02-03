@@ -118,44 +118,44 @@ export default function AgendaWidget({
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 compact:p-3">
       <div className="flex items-center justify-between mb-3">
         <div>
-          <div className="text-sm font-semibold text-gray-900">Today</div>
-          <div className="text-xs text-gray-500">{todayLabel}</div>
+          <div className="text-sm font-semibold text-foreground">Today</div>
+          <div className="text-xs text-muted-foreground">{todayLabel}</div>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={addItem}
-            className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-500"
+            className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-md hover:brightness-110"
           >
             + Add
           </button>
           <button
             onClick={clear}
-            className="text-xs border px-2 py-1 rounded bg-white hover:bg-gray-50"
+            className="text-xs border border-border px-2 py-1 rounded-md bg-surface-2 text-foreground hover:bg-muted"
           >
             Clear
           </button>
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 compact:space-y-1.5">
         {items.length === 0 ? (
-          <div className="text-sm text-gray-400">No agenda items.</div>
+          <div className="text-sm text-muted-foreground">No agenda items.</div>
         ) : (
           items.map((it) => {
             const start = new Date(it.start);
             return (
               <div
                 key={it.id}
-                className="border rounded bg-white p-2 flex items-center justify-between"
+                className="border border-border rounded-lg bg-surface p-2 flex items-center justify-between"
               >
                 <div>
-                  <div className="text-sm font-semibold text-gray-900">
+                  <div className="text-sm font-semibold text-foreground">
                     {it.title}
                   </div>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-muted-foreground">
                     {start.toLocaleTimeString(undefined, {
                       hour: "2-digit",
                       minute: "2-digit",
@@ -175,7 +175,7 @@ export default function AgendaWidget({
                     setItems(updated);
                     saveAgenda(updated);
                   }}
-                  className="text-xs text-red-600 hover:underline"
+                  className="text-xs text-danger hover:underline"
                 >
                   Remove
                 </button>

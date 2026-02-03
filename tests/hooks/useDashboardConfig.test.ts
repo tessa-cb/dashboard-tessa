@@ -5,14 +5,17 @@ import { DEFAULT_DASHBOARD_CONFIG } from "@/config/dashboard-config";
 
 describe("useDashboardConfig", () => {
   beforeEach(() => {
-    window.localStorage.clear();
+    window.localStorage.removeItem("dashboard-tessa:config:v1");
   });
 
   it("hydrates from localStorage", async () => {
     const stored = {
       widgets: [{ instanceId: "x", widgetId: "agenda" }],
     };
-    window.localStorage.setItem("dashboard-tessa:config:v1", JSON.stringify(stored));
+    window.localStorage.setItem(
+      "dashboard-tessa:config:v1",
+      JSON.stringify(stored),
+    );
 
     const { result } = renderHook(() => useDashboardConfig());
 

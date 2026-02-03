@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
+@custom-variant compact (&:where(.compact, .compact *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f6f4;
+  --foreground: #0b1220;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --muted: #eef2f7;
+  --muted-foreground: #5b6476;
+  --border: color-mix(in oklab, var(--foreground) 14%, transparent);
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --danger: #dc2626;
+  --danger-foreground: #ffffff;
+  --success: #16a34a;
+  --success-foreground: #ffffff;
+  --warning: #f59e0b;
+  --warning-foreground: #0b1220;
+  --ring: #60a5fa;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+:root[data-theme="dark"] {
+  --background: #0b0f19;
+  --foreground: #e7eaf0;
+  --surface: #111827;
+  --surface-2: #0f172a;
+  --muted: color-mix(in oklab, var(--surface) 85%, black);
+  --muted-foreground: #a2adbf;
+  --border: color-mix(in oklab, white 14%, transparent);
+  --primary: #60a5fa;
+  --primary-foreground: #0b1220;
+  --danger: #f87171;
+  --danger-foreground: #0b1220;
+  --success: #4ade80;
+  --success-foreground: #0b1220;
+  --warning: #fbbf24;
+  --warning-foreground: #0b1220;
+  --ring: #93c5fd;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme]) {
+    --background: #0b0f19;
+    --foreground: #e7eaf0;
+    --surface: #111827;
+    --surface-2: #0f172a;
+    --muted: color-mix(in oklab, var(--surface) 85%, black);
+    --muted-foreground: #a2adbf;
+    --border: color-mix(in oklab, white 14%, transparent);
+    --primary: #60a5fa;
+    --primary-foreground: #0b1220;
+    --danger: #f87171;
+    --danger-foreground: #0b1220;
+    --success: #4ade80;
+    --success-foreground: #0b1220;
+    --warning: #fbbf24;
+    --warning-foreground: #0b1220;
+    --ring: #93c5fd;
   }
 }
 
+html {
+  color-scheme: light dark;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 body {
-  background: var(--background);
+  background:
+    radial-gradient(
+      1000px 600px at 20% -10%,
+      color-mix(in oklab, var(--primary) 16%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      900px 500px at 90% 0%,
+      color-mix(in oklab, var(--warning) 12%, transparent),
+      transparent 60%
+    ),
+    var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+}
+
+kbd {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translate3d(12px, 0, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-right 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-slide-in {
+    animation: none;
+  }
 }
